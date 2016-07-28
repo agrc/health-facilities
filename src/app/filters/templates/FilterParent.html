@@ -1,0 +1,16 @@
+<div>
+    <button class="btn btn-default"
+            data-toggle="collapse"
+            data-target="#${toggleId}"
+            data-dojo-attach-point='filterHeader'>${name}</button>
+    <div id="${toggleId}" class="panel-collapse collapse" data-dojo-attach-point='body'>
+        <div class="panel-body">
+            <div data-dojo-attach-point="buttonContainer"
+                 class='btn-cont'></div>
+            <button type='button' class='btn btn-xs btn-link pull-left'
+                    data-dojo-attach-event='click: selectAll'>select all</button>
+            <button type='button' class='btn btn-xs btn-link pull-right'
+                    data-dojo-attach-event='click: clear'>clear all</button>
+        </div>
+    </div>
+</div>

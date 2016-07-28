@@ -1,0 +1,8 @@
+{
+    "name": "Healthfacilities.app",
+    "version": "1.0.0",
+    "main": "main",
+    "description": "Application to view health-facilities",
+    "homepage": "https://github.com/keatonwalker/health-facilities",
+    "dojoBuild": "app.profile.js"
+}
