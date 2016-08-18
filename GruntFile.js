@@ -69,7 +69,7 @@ module.exports = function (grunt) {
         '!stubmodule/**',
         '!util/**'
     ];
-    var deployDir = 'SGID';
+    var deployDir = 'HealthFacilities';
     var secrets;
     var sauceConfig = {
         urls: ['http://127.0.0.1:8000/_SpecRunner.html?catch=false'],
@@ -262,7 +262,7 @@ module.exports = function (grunt) {
                 }
             },
             options: {
-                createDirectories: true,
+                createDirectories: false,
                 path: './wwwroot/' + deployDir + '/',
                 srcBasePath: 'deploy/',
                 showProgress: true

@@ -33,12 +33,8 @@ define([
         //      The api key used for services on api.mapserv.utah.gov
         apiKey: '', // acquire at developer.mapserv.utah.gov
 
-        // exportWebMapUrl: String
-        //      print task url
-        exportWebMapUrl: 'http://mapserv.utah.gov/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task',
-
         urls: {
-            facilities: 'http://192.168.230.147/arcgis/rest/services/HealthFacalities/MapServer/0'
+            facilities: 'http://192.168.230.145/arcgis/rest/services/HealthFacilities/MapServer/0'
         },
 
         fieldNames: {
@@ -116,22 +112,22 @@ define([
                 children: [
                     {
                         name: 'ACUTE (General)',
-                        queryValue: '11'},
+                        queryValue: '011'},
                     {
                         name: 'PSYCHIATRIC',
-                        queryValue: '12'},
+                        queryValue: '012'},
                     {
                         name: 'REHABILITATION',
-                        queryValue: '13'},
+                        queryValue: '013'},
                     {
                         name: 'CRITICAL ACCESS HOSPITALS',
-                        queryValue: '14'},
+                        queryValue: '014'},
                     {
                         name: 'LONG TERM CARE HOSPITAL',
-                        queryValue: '15'},
+                        queryValue: '015'},
                     {
                         name: 'CHILDRENS',
-                        queryValue: '16'}]
+                        queryValue: '016'}]
             },
             {
                 name: 'NURSING HOME',
@@ -199,11 +195,11 @@ define([
 
     if (has('agrc-build') === 'prod') {
         // mapserv.utah.gov
-        window.AGRC.apiKey = 'AGRC-F8424FE7767822';
+        window.AGRC.apiKey = 'AGRC-F8424FE7767822';  // make a new one
         window.AGRC.quadWord = 'career-exhibit-panel-stadium';
     } else if (has('agrc-build') === 'stage') {
         // test.mapserv.utah.gov
-        window.AGRC.quadWord = '';
+        window.AGRC.quadWord = 'opera-event-little-pinball';
         window.AGRC.apiKey = 'AGRC-AC122FA9671436';
     } else {
         // localhost
