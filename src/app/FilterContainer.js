@@ -90,28 +90,24 @@ define([
             //      Build a definition query when a filter changes.
             console.log('app/FilterContainer:onFilterChange', arguments);
 
-            var query = null;
-
+            var queryValues = [];
             this.filters.forEach(function (f) {
-                if (f.selected) {
-                    if (!query) {
-                        query = '(' + config.fieldNames.facType + ' = \'' + f.queryValue + '\'';
-                    } else {
-                        query += ' or (' + config.fieldNames.facType + ' = \'' + f.queryValue + '\'';
-                    }
-                    var andOr = ' and ' + config.fieldNames.facSubtype + ' in (';
-                    var end = '';
+                if (f.childFilters.length > 0) {
                     f.childFilters.forEach(function (c) {
                         if (c.selected) {
-                            query += andOr + '\'' + c.queryValue + '\'';
-                            andOr = ', ';
-                            end = ')';
+                            queryValues.push(c.queryValue);
                         }
                     });
-                    query += end + ')';
+                } else {
+                    if (f.selected) {
+                        queryValues.push(f.queryValue);
+                    }
                 }
             }, this);
-
+            var query = '1 = 1';
+            if (queryValues.length > 0) {
+                query = config.fieldNames.facSubtype + ' IN (\'' + queryValues.join('\', \'') + '\')';
+            }
             this.emit('filterChange', {queryFilter: query});
         }
     });

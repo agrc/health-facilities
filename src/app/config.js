@@ -34,9 +34,12 @@ define([
         apiKey: '', // acquire at developer.mapserv.utah.gov
 
         urls: {
-            facilities: 'http://192.168.230.145/arcgis/rest/services/HealthFacilities/MapServer/0'
+            facilities: 'http://192.168.230.152/arcgis/rest/services/HealthFacilities/MapServer/0',
+            download: 'http://192.168.230.152/arcgis/rest/services/CreateCsv/GPServer/Download'
         },
-
+        parameterNames: {
+            output: 'output' // download service
+        },
         fieldNames: {
             facType: 'TYPE', // Health facilities type
             facSubtype: 'FACTYPE' // Health facilities subtype
@@ -54,26 +57,26 @@ define([
                 queryValue: 'AMBULATORY SURGICAL CENTER',
                 children: [
                     {
-                        name: 'AMBULATORY SURGICAL CENTER - MEDICARE CERTIFIED',
+                        name: 'MEDICARE CERTIFIED',
                         queryValue: '151'},
                     {
-                        name: 'AMBULATORY SURGICAL CENTER - PRIVATE PAY',
+                        name: 'PRIVATE PAY',
                         queryValue: '15A'}]
             },
             {
-                name: 'ASSISTED LIVING FACILITY',
+                name: 'ASSISTED LIVING',
                 queryValue: 'ASSISTED LIVING FACILITY',
                 children: [
                     {
-                        name: 'ASSISTED LIVING - TYPE I',
+                        name: 'TYPE I',
                         queryValue: '02A'},
                     {
-                        name: 'ASSISTED LIVING - TYPE II',
+                        name: 'TYPE II',
                         queryValue: '02B'}]
             },
             {
-                name: 'END STAGE RENAL DISEASE FACILITIES',
-                queryValue: 'END STAGE RENAL DISEASE FACILITIES',
+                name: 'END STAGE RENAL DISEASE',
+                queryValue: '091',
                 children: []
             },
             {
@@ -81,18 +84,18 @@ define([
                 queryValue: 'HOME HEALTH AGENCY',
                 children: [
                     {
-                        name: 'HOME HEALTH AGENCIES - MEDICARE CERTIFIED',
+                        name: 'MEDICARE CERTIFIED',
                         queryValue: '051'},
                     {
-                        name: 'HOME HEALTH AGENCIES - MEDICAID CERTIFIED',
+                        name: 'MEDICAID CERTIFIED',
                         queryValue: '052'},
                     {
-                        name: 'HOME HEALTH AGENCY - PRIVATE PAY',
+                        name: 'PRIVATE PAY',
                         queryValue: '05B'}]
             },
             {
                 name: 'PERSONAL CARE AGENCY',
-                queryValue: 'PERSONAL CARE AGENCY',
+                queryValue: 'S71',
                 children: []
             },
             {
@@ -100,10 +103,10 @@ define([
                 queryValue: 'HOSPICE',
                 children: [
                     {
-                        name: 'HOSPICE - MEDICARE CERTIFIED',
+                        name: 'MEDICARE CERTIFIED',
                         queryValue: '161'},
                     {
-                        name: 'HOSPICE - PRIVATE PAY',
+                        name: 'PRIVATE PAY',
                         queryValue: '16A'}]
             },
             {
@@ -120,10 +123,10 @@ define([
                         name: 'REHABILITATION',
                         queryValue: '013'},
                     {
-                        name: 'CRITICAL ACCESS HOSPITALS',
+                        name: 'CRITICAL ACCESS',
                         queryValue: '014'},
                     {
-                        name: 'LONG TERM CARE HOSPITAL',
+                        name: 'LONG TERM CARE',
                         queryValue: '015'},
                     {
                         name: 'CHILDRENS',
@@ -137,57 +140,57 @@ define([
                         name: 'SMALL HEALTH CARE - PRIVATE PAY (2 - 3 RESIDENTS)',
                         queryValue: 'S11'},
                     {
-                        name: 'NURSING FACILITY',
+                        name: 'NURSING',
                         queryValue: '024'},
                     {
-                        name: 'SKILLED NURSING FACILITY/NURSING FACILITY - MEDICARE/MEDICAID',
+                        name: 'SKILLED NURSING / NURSING - MEDICARE/MEDICAID',
                         queryValue: '021'},
                     {
-                        name: 'SKILLED NURSING FACILITY - MEDICARE',
+                        name: 'SKILLED NURSING - MEDICARE',
                         queryValue: '22'},
                     {
-                        name: 'SKILLED NURSING FACILITY',
+                        name: 'SKILLED NURSING',
                         queryValue: '023'},
                     {
                         name: 'NURSING HOME - PRIVATE PAY',
                         queryValue: '02C'},
                     {
-                        name: 'INTERMEDIATE CARE FACILITY FOR THE INTELLECTUALLY DISABLED',
+                        name: 'INTERMEDIATE CARE FOR THE INTELLECTUALLY DISABLED',
                         queryValue: '111'}]
             },
             {
                 name: 'BIRTHING CENTER',
-                queryValue: 'BIRTHING CENTER',
+                queryValue: 'S41',
                 children: []
             },
             {
-                name: 'PSYCHIATRIC RESIDENTIAL TREATMENT FACILITIES',
-                queryValue: 'PSYCHIATRIC RESIDENTIAL TREATMENT FACILITIES',
+                name: 'PSYCHIATRIC RESIDENTIAL TREATMENT',
+                queryValue: '061',
                 children: []
             },
             {
                 name: 'PORTABLE X-RAY SUPPLIERS',
-                queryValue: 'PORTABLE X-RAY SUPPLIERS',
+                queryValue: '071',
                 children: []
             },
             {
                 name: 'OUTPATIENT PHYSICAL THERAPY/SPEECH PATHOLOGY SERVICES',
-                queryValue: 'OUTPATIENT PHYSICAL THERAPY/SPEECH PATHOLOGY SERVICES',
+                queryValue: '081',
                 children: []
             },
             {
                 name: 'RURAL HEALTH CLINICS',
-                queryValue: 'RURAL HEALTH CLINICS',
+                queryValue: '121',
                 children: []
             },
             {
-                name: 'COMPREHENSIVE OUTPATIENT REHABILITATION FACILITIES',
-                queryValue: 'COMPREHENSIVE OUTPATIENT REHABILITATION FACILITIES',
+                name: 'COMPREHENSIVE OUTPATIENT REHABILITATION',
+                queryValue: '141',
                 children: []
             },
             {
                 name: 'ABORTION CLINIC',
-                queryValue: 'ABORTION CLINIC',
+                queryValue: 'S51',
                 children: []
             }
         ]

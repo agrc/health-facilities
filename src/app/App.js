@@ -8,6 +8,7 @@ define([
 
     'app/config',
     'app/FilterContainer',
+    'app/download/Download',
 
     'dijit/registry',
     'dijit/_TemplatedMixin',
@@ -39,6 +40,7 @@ define([
 
     config,
     FilterContainer,
+    Download,
 
     registry,
     _TemplatedMixin,
@@ -79,6 +81,8 @@ define([
         facilityPoints: null,
         map: null,
 
+        download: null,
+
         constructor: function () {
             // summary:
             //      first function to fire after page loads
@@ -98,6 +102,7 @@ define([
             // this.version.innerHTML = config.version;
 
             this.initMap();
+            //this.download = new Download({}, this.downloadDiv)
             //countiesProvider: Provider
             //      Provider for sherlock and zoom to city or county
             var countiesProvider = new WebAPI(
@@ -121,7 +126,8 @@ define([
                     maxResultsToDisplay: 10,
                     placeHolder: 'Enter location'
                 }, this.cityNode),
-                this.filter = new FilterContainer({}, this.facalityFilterNode)
+                this.filter = new FilterContainer({}, this.facalityFilterNode),
+                this.download = new Download({map: this.map}, this.downloadDiv)
             );
 
             this.inherited(arguments);
@@ -180,10 +186,11 @@ define([
             this.facilityPoints = new FeatureLayer(urlfacilities, {
                 id: this.facilitiesId,
                 opacity: 0.75,
-                outFields: ['TYPE', 'FACID', 'NAME', 'ADDRESS', 'TELEPHONE', 'COUNTY']
+                outFields: ['TYPE', 'FACID', 'FACTYPE', 'NAME', 'ADDRESS', 'CITY', 'ZIP', 'TELEPHONE', 'COUNTY']
             });
 
             this.facilityPoints.on('mouse-over', lang.hitch(this, 'onFacPointHover'));
+            this.facilityPoints.on('mouse-out', lang.hitch(this, 'onFacPointLeave'));
 
             this.map.addLayer(this.facilityPoints);
         },
@@ -197,11 +204,19 @@ define([
             var windowContent = [config.fieldNames.facType + ': ' + evt.graphic.attributes[config.fieldNames.facType],
                                  'FACID: ' + evt.graphic.attributes.FACID,
                                  'FACTYPE: ' + evt.graphic.attributes.FACTYPE,
-                                  'Name: ' + evt.graphic.attributes.NAME];
-            this.map.infoWindow.resize(300, 100);
-            this.map.infoWindow.setTitle('Health facility');
+                                 'COUNTY: ' + evt.graphic.attributes.COUNTY,
+                                 'ADDRESS: ' + evt.graphic.attributes.ADDRESS + ', ' +
+                                               evt.graphic.attributes.CITY + ' ' +
+                                               evt.graphic.attributes.ZIP,
+                                 'PHONE: ' + evt.graphic.attributes.TELEPHONE];
+            this.map.infoWindow.resize(300, 150);
+            this.map.infoWindow.setTitle(evt.graphic.attributes.NAME);
             this.map.infoWindow.setContent(windowContent.join('<br>'));
             this.map.infoWindow.show(evt.screenPoint, this.map.getInfoWindowAnchor(evt.screenPoint));
+        },
+        onFacPointLeave: function (evt) {
+            console.log('yapp.App::onFacPointLeave', evt);
+            this.map.infoWindow.hide();
         }
     });
 });
