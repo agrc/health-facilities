@@ -34,15 +34,15 @@ define([
         apiKey: '', // acquire at developer.mapserv.utah.gov
 
         urls: {
-            facilities: 'http://192.168.230.152/arcgis/rest/services/HealthFacilities/MapServer/0',
-            download: 'http://192.168.230.152/arcgis/rest/services/CreateCsv/GPServer/Download'
+            facilities: 'http://192.168.230.155/arcgis/rest/services/HealthFacilities/MapServer/0',
+            download: 'http://192.168.230.155/arcgis/rest/services/CreateCsv/GPServer/Download'
         },
         parameterNames: {
             output: 'output' // download service
         },
         fieldNames: {
             facType: 'TYPE', // Health facilities type
-            facSubtype: 'FACTYPE' // Health facilities subtype
+            facSubtype: 'FacType' // Health facilities subtype
         },
         featureClassNames: {
             counties: 'SGID10.Boundaries.Counties',
@@ -60,7 +60,7 @@ define([
                         name: 'MEDICARE CERTIFIED',
                         queryValue: '151'},
                     {
-                        name: 'PRIVATE PAY',
+                        name: 'LICENSED ONLY',
                         queryValue: '15A'}]
             },
             {
@@ -84,13 +84,10 @@ define([
                 queryValue: 'HOME HEALTH AGENCY',
                 children: [
                     {
-                        name: 'MEDICARE CERTIFIED',
+                        name: 'MEDICARE/MEDICAID CERTIFIED',
                         queryValue: '051'},
                     {
-                        name: 'MEDICAID CERTIFIED',
-                        queryValue: '052'},
-                    {
-                        name: 'PRIVATE PAY',
+                        name: 'LICENSED ONLY',
                         queryValue: '05B'}]
             },
             {
@@ -106,7 +103,7 @@ define([
                         name: 'MEDICARE CERTIFIED',
                         queryValue: '161'},
                     {
-                        name: 'PRIVATE PAY',
+                        name: 'LICENSED ONLY',
                         queryValue: '16A'}]
             },
             {
@@ -130,24 +127,27 @@ define([
                         queryValue: '015'},
                     {
                         name: 'CHILDRENS',
-                        queryValue: '016'}]
+                        queryValue: '016'},
+                    {
+                        name: 'CHEMICAL DEPENDENCY',
+                        queryValue: '01A'}]
             },
             {
                 name: 'NURSING HOME',
                 queryValue: 'NURSING HOME',
                 children: [
                     {
-                        name: 'SMALL HEALTH CARE - PRIVATE PAY (2 - 3 RESIDENTS)',
+                        name: 'SMALL - PRIVATE PAY (2 - 3 RESIDENTS)',
                         queryValue: 'S11'},
                     {
                         name: 'NURSING',
                         queryValue: '024'},
                     {
-                        name: 'SKILLED NURSING / NURSING - MEDICARE/MEDICAID',
+                        name: 'SKILLED / NURSING - MEDICARE/MEDICAID',
                         queryValue: '021'},
                     {
                         name: 'SKILLED NURSING - MEDICARE',
-                        queryValue: '22'},
+                        queryValue: '022'},
                     {
                         name: 'SKILLED NURSING',
                         queryValue: '023'},
@@ -155,7 +155,7 @@ define([
                         name: 'NURSING HOME - PRIVATE PAY',
                         queryValue: '02C'},
                     {
-                        name: 'INTERMEDIATE CARE FOR THE INTELLECTUALLY DISABLED',
+                        name: 'INTELLECTUALLY DISABLED INTERMEDIATE CARE',
                         queryValue: '111'}]
             },
             {
@@ -174,7 +174,7 @@ define([
                 children: []
             },
             {
-                name: 'OUTPATIENT PHYSICAL THERAPY/SPEECH PATHOLOGY SERVICES',
+                name: 'PHYSICAL THERAPY/SPEECH PATHOLOGY',
                 queryValue: '081',
                 children: []
             },
@@ -190,10 +190,128 @@ define([
             },
             {
                 name: 'ABORTION CLINIC',
-                queryValue: 'S51',
-                children: []
+                queryValue: 'ABORTION CLINIC',
+                children: [
+                    {
+                        name: 'ABORTION CLINIC TYPE 1',
+                        queryValue: 'S51'},
+                    {
+                        name: 'ABORTION CLINIC TYPE 2',
+                        queryValue: 'S52'}]
             }
-        ]
+        ],
+        cities: ['ALPINE',
+                 'AMERICAN FORK',
+                 'ANNABELLA',
+                 'BEAVER',
+                 'BENSON',
+                 'BLANDING',
+                 'BLUFF',
+                 'BLUFFDALE',
+                 'BOUNTIFUL',
+                 'BRIGHAM CITY',
+                 'CANNONVILLE',
+                 'CASTLE DALE',
+                 'CEDAR CITY',
+                 'CEDAR HILLS',
+                 'CENTERFIELD',
+                 'CENTERVILLE',
+                 'CIRCLEVILLE',
+                 'CLEARFIELD',
+                 'CLINTON',
+                 'COALVILLE',
+                 'DELTA',
+                 'DRAPER',
+                 'DUCHESNE',
+                 'EDEN',
+                 'ELK RIDGE',
+                 'ELMO',
+                 'ENOCH',
+                 'EPHRAIM',
+                 'FARMINGTON',
+                 'FARR WEST',
+                 'FERRON',
+                 'FILLMORE',
+                 'FRUIT HEIGHTS',
+                 'GRANTSVILLE',
+                 'GUNNISON',
+                 'HEBER CITY',
+                 'HERRIMAN',
+                 'HIGHLAND',
+                 'HOLLADAY',
+                 'HUNTSVILLE',
+                 'HURRICANE',
+                 'HYDE PARK',
+                 'IVINS',
+                 'KAMAS',
+                 'KANAB',
+                 'KAYSVILLE',
+                 'KEARNS',
+                 'LAYTON',
+                 'LEHI',
+                 'LEVAN',
+                 'LEWISTON',
+                 'LINDON',
+                 'LOA',
+                 'LOGAN',
+                 'MAGNA',
+                 'MAPLETON',
+                 'MARRIOTT-SLATERVILLE',
+                 'MIDVALE',
+                 'MILFORD',
+                 'MOAB',
+                 'MONROE',
+                 'MONTICELLO',
+                 'MONUMENT VALLEY',
+                 'MORGAN',
+                 'MOUNT PLEASANT',
+                 'MURRAY',
+                 'NAPLES',
+                 'NEPHI',
+                 'NORTH LOGAN',
+                 'NORTH OGDEN',
+                 'OAKLEY',
+                 'OGDEN',
+                 'OREM',
+                 'PANGUITCH',
+                 'PARK CITY',
+                 'PAROWAN',
+                 'PAYSON',
+                 'PERRY',
+                 'PLEASANT GROVE',
+                 'PLEASANT VIEW',
+                 'PRICE',
+                 'PROVIDENCE',
+                 'PROVO',
+                 'RICHFIELD',
+                 'RIVERDALE',
+                 'RIVERTON',
+                 'ROOSEVELT',
+                 'ROY',
+                 'SALEM',
+                 'SALINA',
+                 'SALT LAKE CITY',
+                 'SANDY',
+                 'SANTAQUIN',
+                 'SOUTH JORDAN',
+                 'SOUTH OGDEN',
+                 'SOUTH SALT LAKE',
+                 'SPANISH FORK',
+                 'SPRINGVILLE',
+                 'ST GEORGE',
+                 'SYRACUSE',
+                 'TAYLORSVILLE',
+                 'TOOELE',
+                 'TREMONTON',
+                 'VERNAL',
+                 'WASHINGTON',
+                 'WASHINGTON TERRACE',
+                 'WEST BOUNTIFUL',
+                 'WEST HAVEN',
+                 'WEST JORDAN',
+                 'WEST POINT',
+                 'WEST VALLEY CITY',
+                 'WOODS CROSS']
     };
 
     if (has('agrc-build') === 'prod') {

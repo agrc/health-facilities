@@ -153,13 +153,15 @@ define([
 
             this.hideErrMsg();
             var defQuery = this.map.getLayer('Healthfacilities').getDefinitionExpression();
+            if (!defQuery) {
+                defQuery = '1 = 1';
+            }
+            if (config.app.city) {
+                defQuery += ' AND City = \'' + config.app.city + '\'';
+            } else if (config.app.county) {
+                defQuery += ' AND County = \'' + config.app.county + '\'';
+            }
             console.log('app/download/Download:download', defQuery);
-            // var fileType = this.fileTypes.value;
-            //
-            // if (fileType === '') {
-            //     this.showErrMsg(this.noFormatMsg);
-            //     return;
-            // }
 
             this.showLoader();
             this.hideDownloadLink();
@@ -182,7 +184,8 @@ define([
             };
 
             this.gp.submitJob(params);
-
+            config.app.city = null;
+            config.app.county = null;
             return params;
         },
         showLoader: function () {
@@ -233,22 +236,5 @@ define([
 
             domClass.add(this.downloadAnchorContainer, 'hidden');
         }
-        // toggleSelectionBtn: function (show) {
-        //     // summary:
-        //     //      description
-        //     // show: Boolean
-        //     console.log('app/download/Download:toggleSelectionBtn', arguments);
-        //
-        //     var classFunc = (show) ? domClass.remove : domClass.add;
-        //     classFunc(this.selectedSpan, 'hidden');
-        //     classFunc(this.clearSelectedBtn, 'hidden');
-        // },
-        // onClearSelected: function () {
-        //     // summary:
-        //     //      description
-        //     console.log('app/download/Download:onClearSelected', arguments);
-        //
-        //     topic.publish(config.topics.appDownloadDownload.clearSelection);
-        // }
     });
 });

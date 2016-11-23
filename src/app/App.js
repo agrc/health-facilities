@@ -83,6 +83,10 @@ define([
 
         download: null,
 
+        sherlock: null,
+        county: null,
+        city: null,
+
         constructor: function () {
             // summary:
             //      first function to fire after page loads
@@ -120,7 +124,7 @@ define([
                     map: this.map,
                     centerContainer: this.centerContainer
                 }, this.sidebarToggle),
-                new Sherlock({
+                this.sherlock = new Sherlock({
                     provider: countiesProvider,
                     map: this.map,
                     maxResultsToDisplay: 10,
@@ -153,6 +157,21 @@ define([
             }, this);
 
             this.filter.on('filterChange', lang.hitch(this, 'onFilter'));
+            this.sherlock.on('zoomed', lang.hitch(this, function (graphic) {
+                var name = graphic.attributes.NAME
+                if (name.indexOf('County') !== -1) {
+                    this.county = name.replace(' County', '').toUpperCase();
+                } else {
+                    this.county = null;
+                }
+                if (config.cities.indexOf(name.toUpperCase()) !== -1) {
+                    this.city = name.toUpperCase();
+                    console.log('fuckery', name);
+                } else {
+                    this.city = null;
+                }
+                console.log('Sherlock app zoom', this.county);
+            }));
             this.inherited(arguments);
         },
         initMap: function () {
@@ -186,7 +205,10 @@ define([
             this.facilityPoints = new FeatureLayer(urlfacilities, {
                 id: this.facilitiesId,
                 opacity: 0.75,
-                outFields: ['TYPE', 'FACID', 'FACTYPE', 'NAME', 'ADDRESS', 'CITY', 'ZIP', 'TELEPHONE', 'COUNTY']
+                outFields: ['Name', 'TYPE', 'AdminFirst',
+                            'AdminLast', 'Address', 'City',
+                            'ZipCode', 'Beds', 'CurrentLicense',
+                            'LicenseExperiation', 'LicNumber', 'Phone']
             });
 
             this.facilityPoints.on('mouse-over', lang.hitch(this, 'onFacPointHover'));
@@ -199,18 +221,23 @@ define([
             this.facilityPoints.setDefinitionExpression(e.queryFilter);
         },
         onFacPointHover: function (evt) {
+            var nullToEmpty = function (fieldValue) {
+                return fieldValue === null ? '' : fieldValue;
+            };
             console.log('yapp.App::onFacPointHover', evt);
             console.log('yapp.App::onFacPointHover', evt.graphic.attributes);
-            var windowContent = [config.fieldNames.facType + ': ' + evt.graphic.attributes[config.fieldNames.facType],
-                                 'FACID: ' + evt.graphic.attributes.FACID,
-                                 'FACTYPE: ' + evt.graphic.attributes.FACTYPE,
-                                 'COUNTY: ' + evt.graphic.attributes.COUNTY,
-                                 'ADDRESS: ' + evt.graphic.attributes.ADDRESS + ', ' +
-                                               evt.graphic.attributes.CITY + ' ' +
-                                               evt.graphic.attributes.ZIP,
-                                 'PHONE: ' + evt.graphic.attributes.TELEPHONE];
-            this.map.infoWindow.resize(300, 150);
-            this.map.infoWindow.setTitle(evt.graphic.attributes.NAME);
+            var windowContent = ['Type: '  + nullToEmpty(evt.graphic.attributes[config.fieldNames.facType]),
+                                 'Contact: ' + nullToEmpty(evt.graphic.attributes.AdminFirst) + ' ' + nullToEmpty(evt.graphic.attributes.AdminLast),
+                                 'ADDRESS: ' + nullToEmpty(evt.graphic.attributes.Address) + ', ' +
+                                               nullToEmpty(evt.graphic.attributes.City) + ' ' +
+                                               nullToEmpty(evt.graphic.attributes.ZipCode),
+                                 'Beds: ' + nullToEmpty(evt.graphic.attributes.Beds),
+                                 'License Date: ' + nullToEmpty(evt.graphic.attributes.CurrentLicense),
+                                 'License Expiration: ' + nullToEmpty(evt.graphic.attributes.LicenseExperiation),
+                                 'License Number: ' + nullToEmpty(evt.graphic.attributes.LicNumber),
+                                 'Phone Number: ' + nullToEmpty(evt.graphic.attributes.Phone)];
+            this.map.infoWindow.resize(400, 200);
+            this.map.infoWindow.setTitle(evt.graphic.attributes.Name);
             this.map.infoWindow.setContent(windowContent.join('<br>'));
             this.map.infoWindow.show(evt.screenPoint, this.map.getInfoWindowAnchor(evt.screenPoint));
         },

@@ -7,6 +7,42 @@ import itertools
 import json
 
 
+# subCategoryText = {
+#     '151': 'MEDICARE CERTIFIED',
+#     '15A': 'LICENSED ONLY',
+#     '02A': 'TYPE I',
+#     '02B': 'TYPE II',
+#     '091': 'END STAGE RENAL DISEASE',
+#     '051': 'MEDICARE/MEDICAID CERTIFIED',
+#     '05B': 'LICENSED ONLY',
+#     'S71': 'PERSONAL CARE AGENCY',
+#     '161': 'MEDICARE CERTIFIED',
+#     '16A': 'LICENSED ONLY',
+#     '011': 'ACUTE (General)',
+#     '012': 'PSYCHIATRIC',
+#     '013': 'REHABILITATION',
+#     '014': 'CRITICAL ACCESS',
+#     '015': 'LONG TERM CARE',
+#     '016': 'CHILDRENS',
+#     '01A': 'CHEMICAL DEPENDENCY',
+#     'S11': 'SMALL - PRIVATE PAY (2 - 3 RESIDENTS)',
+#     '024': 'NURSING',
+#     '021': 'SKILLED / NURSING - MEDICARE/MEDICAID',
+#     '022': 'SKILLED NURSING - MEDICARE',
+#     '023': 'SKILLED NURSING',
+#     '02C': 'NURSING HOME - PRIVATE PAY',
+#     '111': 'INTELLECTUALLY DISABLED INTERMEDIATE CARE',
+#     'S41': 'BIRTHING CENTER',
+#     '061': 'PSYCHIATRIC RESIDENTIAL TREATMENT',
+#     '071': 'PORTABLE X-RAY SUPPLIERS',
+#     '081': 'PHYSICAL THERAPY/SPEECH PATHOLOGY',
+#     '121': 'RURAL HEALTH CLINICS',
+#     '141': 'COMPREHENSIVE OUTPATIENT REHABILITATION',
+#     'S51': 'ABORTION CLINIC TYPE 1',
+#     'S52': 'ABORTION CLINIC TYPE 2'
+#     }
+
+
 class Toolbox(object):
     def __init__(self):
         self.label = "CSV toolbox"
@@ -18,15 +54,28 @@ class Toolbox(object):
 
 class CreateCsv(object):
 
-    version = '1.0.0'
+    version = '1.1.1'
 
     def __init__(self, workspace=None):
         self.label = 'Download'
         self.description = 'Download selected health facility data v: ' + self.version
         self.canRunInBackground = True
-        self.name = 'FacailityList'
+        self.name = 'FacilityList'
         self.health_facilities = r'C:\mapdata\HealthFacilities.gdb\HealthCareFacilities'
-        self.fields = ['FACTYPE', 'NAME']
+        self.fields = ['Name',
+                       'TYPE',
+                       'Subcategory',
+                       'AdminFirst',
+                       'AdminLast',
+                       'Address',
+                       'City',
+                       'ZipCode',
+                       'Beds',
+                       'CurrentLicense',
+                       'LicenseExperiation',
+                       'LicNumber',
+                       'Phone',
+                       'COUNTY']
 
     def _delete_scratch_data(self, directory, types=None):
         arcpy.AddMessage('--_delete_scratch_data::{}'.format(directory))
@@ -105,7 +154,7 @@ class CreateCsv(object):
         '''
         arcpy.AddMessage('executing version ' + self.version)
         arcpy.AddMessage(parameters[0].valueAsText)
-        # {"query": "FACTYPE IN ('151')"}
+        # {"query": "FACTYPE IN ('051')"}
         facility_query = self._deserialize_json(parameters[0].valueAsText)
         facility_query = facility_query['query']
 
