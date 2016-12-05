@@ -53,9 +53,7 @@ define([
 
             this.filters = [];
 
-            var i = 0;
-            config.filters.forEach(function (f) {
-                i++;
+            config.filters.forEach(function (f, i) {
                 var tempFilter = null;
 
                 if (f.children.length) {

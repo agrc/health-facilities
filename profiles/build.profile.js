@@ -30,7 +30,6 @@ var profile = {
         }
     },
     packages: [{
-        name: 'proj4',
         resourceTags: {
             amd: function () {
                 return true;
