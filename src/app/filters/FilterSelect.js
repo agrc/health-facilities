@@ -32,7 +32,7 @@ define([
         templateString: template,
         baseClass: 'filter-select',
         widgetsInTemplate: true,
-        //selected: boolean
+        // selected: boolean
         //      Flag to signal when this filter has been selected
         selected: false,
         childFilters: [],
@@ -40,7 +40,7 @@ define([
         // name: String
         //      The string that shows up in the button content.
         name: null,
-        //queryValue: String
+        // queryValue: String
         //      This filters addition to the facility definition query
         queryValue: null,
 
@@ -65,7 +65,9 @@ define([
 
             this.selected = !this.selected;
 
-            this.emit('changed', {bubbles: true, cancelable: false});
+            this.emit('changed', {
+                bubbles: true,
+                cancelable: false });
         },
         select: function () {
             // summary:

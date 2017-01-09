@@ -62,7 +62,7 @@ define([
                         tempChildren.push(
                             new FilterSelect({
                                 name: c.name,
-                                queryValue: c.queryValue})
+                                queryValue: c.queryValue })
                         );
                     }, this);
                     tempFilter = new FilterParent(
@@ -96,17 +96,15 @@ define([
                             queryValues.push(c.queryValue);
                         }
                     });
-                } else {
-                    if (f.selected) {
-                        queryValues.push(f.queryValue);
-                    }
+                } else if (f.selected) {
+                    queryValues.push(f.queryValue);
                 }
             }, this);
             var query = '1 = 1';
             if (queryValues.length > 0) {
                 query = config.fieldNames.facSubtype + ' IN (\'' + queryValues.join('\', \'') + '\')';
             }
-            this.emit('filterChange', {queryFilter: query});
+            this.emit('filterChange', { queryFilter: query });
         }
     });
 });

@@ -75,7 +75,7 @@ define([
         //      container for holding custom child widgets
         childWidgets: null,
 
-        //facilitiesId
+        // facilitiesId
         //  layer ID for health facality points
         facilitiesId: 'Healthfacilities',
         facilityPoints: null,
@@ -106,8 +106,8 @@ define([
             // this.version.innerHTML = config.version;
 
             this.initMap();
-            //this.download = new Download({}, this.downloadDiv)
-            //countiesProvider: Provider
+            // this.download = new Download({}, this.downloadDiv)
+            // countiesProvider: Provider
             //      Provider for sherlock and zoom to city or county
             var countiesProvider = new WebAPI(
                 config.apiKey,
@@ -131,7 +131,7 @@ define([
                     placeHolder: 'Enter location'
                 }, this.cityNode),
                 this.filter = new FilterContainer({}, this.facalityFilterNode),
-                this.download = new Download({map: this.map}, this.downloadDiv)
+                this.download = new Download({ map: this.map }, this.downloadDiv)
             );
 
             this.inherited(arguments);
@@ -158,17 +158,16 @@ define([
 
             this.filter.on('filterChange', lang.hitch(this, 'onFilter'));
             this.sherlock.on('zoomed', lang.hitch(this, function (graphic) {
-                var name = graphic.attributes.NAME
-                if (name.indexOf('County') !== -1) {
-                    this.county = name.replace(' County', '').toUpperCase();
-                } else {
+                var name = graphic.attributes.NAME;
+                if (name.indexOf('County') === -1) {
                     this.county = null;
-                }
-                if (config.cities.indexOf(name.toUpperCase()) !== -1) {
-                    this.city = name.toUpperCase();
-                    console.log('fuckery', name);
                 } else {
+                    this.county = name.replace(' County', '').toUpperCase();
+                }
+                if (config.cities.indexOf(name.toUpperCase()) === -1) {
                     this.city = null;
+                } else {
+                    this.city = name.toUpperCase();
                 }
                 console.log('Sherlock app zoom', this.county);
             }));
@@ -196,10 +195,11 @@ define([
             this.facilityPoints = new FeatureLayer(urlfacilities, {
                 id: this.facilitiesId,
                 opacity: 0.75,
-                outFields: ['Name', 'TYPE', 'AdminFirst',
-                            'AdminLast', 'Address', 'City',
-                            'ZipCode', 'Beds', 'CurrentLicense',
-                            'LicenseExperiation', 'LicNumber', 'Phone']
+                outFields: [
+                    'Name', 'TYPE', 'AdminFirst',
+                    'AdminLast', 'Address', 'City',
+                    'ZipCode', 'Beds', 'CurrentLicense',
+                    'LicenseExperiation', 'LicNumber', 'Phone']
             });
 
             this.facilityPoints.on('mouse-over', lang.hitch(this, 'onFacPointHover'));
@@ -217,17 +217,19 @@ define([
             };
             console.log('yapp.App::onFacPointHover', evt);
             console.log('yapp.App::onFacPointHover', evt.graphic.attributes);
-            var windowContent = ['Type: '  + nullToEmpty(evt.graphic.attributes[config.fieldNames.facType]),
-                                 'Contact: ' + nullToEmpty(evt.graphic.attributes.AdminFirst) + ' ' + nullToEmpty(evt.graphic.attributes.AdminLast),
-                                 'ADDRESS: ' + nullToEmpty(evt.graphic.attributes.Address) + ', ' +
+            var windowContent = [
+                'Type: ' + nullToEmpty(evt.graphic.attributes[config.fieldNames.facType]),
+                'Contact: ' + nullToEmpty(evt.graphic.attributes.AdminFirst) + ' ' +
+                nullToEmpty(evt.graphic.attributes.AdminLast),
+                'ADDRESS: ' + nullToEmpty(evt.graphic.attributes.Address) + ', ' +
                                                nullToEmpty(evt.graphic.attributes.City) + ' ' +
                                                nullToEmpty(evt.graphic.attributes.ZipCode),
-                                 'Beds: ' + nullToEmpty(evt.graphic.attributes.Beds),
-                                 'License Date: ' + nullToEmpty(evt.graphic.attributes.CurrentLicense),
-                                 'License Expiration: ' + nullToEmpty(evt.graphic.attributes.LicenseExperiation),
-                                 'License Number: ' + nullToEmpty(evt.graphic.attributes.LicNumber),
-                                 'Phone Number: ' + nullToEmpty(evt.graphic.attributes.Phone)];
-            this.map.infoWindow.resize(400, 200);
+                'Beds: ' + nullToEmpty(evt.graphic.attributes.Beds),
+                'License Date: ' + nullToEmpty(evt.graphic.attributes.CurrentLicense),
+                'License Expiration: ' + nullToEmpty(evt.graphic.attributes.LicenseExperiation),
+                'License Number: ' + nullToEmpty(evt.graphic.attributes.LicNumber),
+                'Phone Number: ' + nullToEmpty(evt.graphic.attributes.Phone)];
+            this.map.infoWindow.resize(400, 200); // eslint-disable-line no-magic-numbers
             this.map.infoWindow.setTitle(evt.graphic.attributes.Name);
             this.map.infoWindow.setContent(windowContent.join('<br>'));
             this.map.infoWindow.show(evt.screenPoint, this.map.getInfoWindowAnchor(evt.screenPoint));

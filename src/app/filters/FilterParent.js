@@ -35,7 +35,7 @@ define([
         templateString: template,
         baseClass: 'filter-parent',
         widgetsInTemplate: true,
-        //selected: boolean
+        // selected: boolean
         //      Flag to signal when any child filter has been selected
         selected: false,
         // Properties to be sent into constructor
@@ -48,7 +48,7 @@ define([
         // childFilters: []
         //      Array of child subtype filters for this container
         childFilters: null,
-        //queryValue: String
+        // queryValue: String
         //      This filters addition to the facility definition query
         queryValue: null,
 
@@ -97,7 +97,9 @@ define([
                 domClass.remove(this.filterHeader, 'full-select');
             }
 
-            this.emit('changed', {bubbles: true, cancelable: false});
+            this.emit('changed', {
+                bubbles: true,
+                cancelable: false });
         },
         clear: function () {
           // summary:
@@ -113,7 +115,9 @@ define([
             domClass.remove(this.filterHeader, 'partial-select');
             domClass.remove(this.filterHeader, 'full-select');
 
-            this.emit('changed', {bubbles: true, cancelable: false});
+            this.emit('changed', {
+                bubbles: true,
+                cancelable: false });
         },
         selectAll: function () {
           // summary:
@@ -127,8 +131,9 @@ define([
             this.selected = true;
             domClass.add(this.filterHeader, 'full-select');
 
-            this.emit('changed', {bubbles: true, cancelable: false});
-
+            this.emit('changed', {
+                bubbles: true,
+                cancelable: false });
         }
     });
 });
