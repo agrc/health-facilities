@@ -2,9 +2,9 @@
   "name": "health-facilities",
   "version": "1.0.0",
   "dependencies": {
-    "agrc": "agrc-widgets#4.0.0",
+    "agrc": "agrc-widgets#5.0.2",
     "agrc-jasmine-matchers": "~0.1.0",
-    "bootstrap": "^3.3",
+    "bootstrap": "3.3.6",
     "esri": "arcgis-js-api#~3.15.0",
     "ijit": "agrc-ijit#3.1.1",
     "jasmine-favicon-reporter": "*",
@@ -18,6 +18,7 @@
     "dgrid": "0.3.17/esri-3.14.0",
     "dojo": "v1.10.4/esri-3.14.0",
     "esri": "~3.15.0",
-    "xstyle": "0.3.2"
+    "xstyle": "0.3.2",
+    "agrc": "5.0.2"
   }
 }

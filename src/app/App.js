@@ -181,16 +181,7 @@ define([
 
             this.map = new BaseMap(this.mapDiv, {
                 useDefaultBaseMap: false,
-                showAttribution: false,
-                extent: new Extent({
-                    xmax: -12010849.397533866,
-                    xmin: -12898741.918094235,
-                    ymax: 5224652.298632992,
-                    ymin: 4422369.249751998,
-                    spatialReference: {
-                        wkid: 3857
-                    }
-                })
+                showAttribution: false
             });
 
             this.childWidgets.push(
