@@ -82,70 +82,6 @@ define([
 
             this.inherited(arguments);
         },
-        // setupConnections: function () {
-        //     // summary:
-        //     //      wire events, and such
-        //     //
-        //     console.log('app.download.Download::setupConnections', arguments);
-        //
-        //     var that = this;
-        //     this.own(
-        //         topic.subscribe(config.topics.appSearchResultsGrid.downloadFeaturesDefined,
-        //             function (idMap, isSelection) {
-        //                 that.updateCount(idMap);
-        //                 that.downloadFeatures = idMap;
-        //                 that.toggleSelectionBtn(isSelection);
-        //             }
-        //         ),
-        //         this.watch('count', function (name, original, change) {
-        //             that.updateVisibility(change);
-        //         }),
-        //         topic.subscribe(config.topics.appSearch.clear, lang.hitch(this, 'clear')),
-        //         topic.subscribe(config.topics.appSearch.searchStarted, lang.hitch(this, 'clear'))
-        //     );
-        // },
-        // clear: function () {
-        //     // summary:
-        //     //      description
-        //     console.log('app/download/Download:clear', arguments);
-        //
-        //     this.set('count', '0');
-        //     this.hideErrMsg();
-        //     this.hideDownloadLink();
-        //     this.toggleSelectionBtn(false);
-        // },
-        // updateCount: function (data) {
-        //     // summary:
-        //     //      receives the data from the search xhr and sets the count
-        //     //      value of the label to the number of results
-        //     // data - xhr search result from appSearch.downloadFeaturesDefined topic
-        //     console.log('app.download.Download::updateCount', arguments);
-        //
-        //     var count = 0;
-        //     for (var key in data) {
-        //         // make sure it's not from the prototype!
-        //         if (data.hasOwnProperty(key)) {
-        //             count += data[key].length;
-        //         }
-        //     }
-        //
-        //     this.set('count', formatting.addCommas(count));
-        //
-        //     return count;
-        // },
-        // updateVisibility: function (value) {
-        //     // summary:
-        //     //      enables and disables the download button based on result counts
-        //     // value
-        //     console.log('app.download.Download::updateButtonState', arguments);
-        //
-        //     if (value !== '0') {
-        //         domClass.replace(this.domNode, 'show', 'hidden');
-        //         return;
-        //     }
-        //
-        //     domClass.replace(this.domNode, 'hidden', 'show');
-        // },
         download: function () {
             // summary:
             //      sends download request to gp tool if there are any selected features
@@ -180,12 +116,13 @@ define([
             }
 
             var params = {
-                'filter_query': JSON.stringify({'query': defQuery})
+                'filter_query': JSON.stringify({ 'query': defQuery })
             };
 
             this.gp.submitJob(params);
             config.app.city = null;
             config.app.county = null;
+
             return params;
         },
         showLoader: function () {

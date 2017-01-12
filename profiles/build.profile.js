@@ -1,4 +1,4 @@
-/*eslint-disable no-unused-vars*/
+/* eslint-disable no-unused-vars */
 var profile = {
     basePath: '../src',
     action: 'release',
@@ -29,16 +29,6 @@ var profile = {
             exclude: ['dojo/dojo']
         }
     },
-    packages: [{
-        resourceTags: {
-            amd: function () {
-                return true;
-            },
-            copyOnly: function () {
-                return false;
-            }
-        }
-    }],
     staticHasFeatures: {
         // The trace & log APIs are used for debugging the loader, so we don’t need them in the build
         'dojo-trace-api': 0,

@@ -200,6 +200,9 @@ define([
                         queryValue: 'S52' }]
             }
         ],
+        // cities: array
+        //         List of cities contained in health facility data.
+        //         Used to limit download queries based on sherlock zoom. This could improve.
         cities: ['ALPINE',
             'AMERICAN FORK',
             'ANNABELLA',

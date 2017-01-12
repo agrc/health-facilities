@@ -102,11 +102,7 @@ define([
             //      Fires when
             console.log('app.App::postCreate', arguments);
 
-            // set version number
-            // this.version.innerHTML = config.version;
-
             this.initMap();
-            // this.download = new Download({}, this.downloadDiv)
             // countiesProvider: Provider
             //      Provider for sherlock and zoom to city or county
             var countiesProvider = new WebAPI(

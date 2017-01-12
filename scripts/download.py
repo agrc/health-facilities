@@ -7,42 +7,6 @@ import itertools
 import json
 
 
-# subCategoryText = {
-#     '151': 'MEDICARE CERTIFIED',
-#     '15A': 'LICENSED ONLY',
-#     '02A': 'TYPE I',
-#     '02B': 'TYPE II',
-#     '091': 'END STAGE RENAL DISEASE',
-#     '051': 'MEDICARE/MEDICAID CERTIFIED',
-#     '05B': 'LICENSED ONLY',
-#     'S71': 'PERSONAL CARE AGENCY',
-#     '161': 'MEDICARE CERTIFIED',
-#     '16A': 'LICENSED ONLY',
-#     '011': 'ACUTE (General)',
-#     '012': 'PSYCHIATRIC',
-#     '013': 'REHABILITATION',
-#     '014': 'CRITICAL ACCESS',
-#     '015': 'LONG TERM CARE',
-#     '016': 'CHILDRENS',
-#     '01A': 'CHEMICAL DEPENDENCY',
-#     'S11': 'SMALL - PRIVATE PAY (2 - 3 RESIDENTS)',
-#     '024': 'NURSING',
-#     '021': 'SKILLED / NURSING - MEDICARE/MEDICAID',
-#     '022': 'SKILLED NURSING - MEDICARE',
-#     '023': 'SKILLED NURSING',
-#     '02C': 'NURSING HOME - PRIVATE PAY',
-#     '111': 'INTELLECTUALLY DISABLED INTERMEDIATE CARE',
-#     'S41': 'BIRTHING CENTER',
-#     '061': 'PSYCHIATRIC RESIDENTIAL TREATMENT',
-#     '071': 'PORTABLE X-RAY SUPPLIERS',
-#     '081': 'PHYSICAL THERAPY/SPEECH PATHOLOGY',
-#     '121': 'RURAL HEALTH CLINICS',
-#     '141': 'COMPREHENSIVE OUTPATIENT REHABILITATION',
-#     'S51': 'ABORTION CLINIC TYPE 1',
-#     'S52': 'ABORTION CLINIC TYPE 2'
-#     }
-
-
 class Toolbox(object):
     def __init__(self):
         self.label = "CSV toolbox"
