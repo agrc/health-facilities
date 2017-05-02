@@ -93,9 +93,9 @@ define([
                 defQuery = '1 = 1';
             }
             if (config.app.city) {
-                defQuery += ' AND City = \'' + config.app.city + '\'';
+                defQuery = defQuery + (' AND City = \'' + config.app.city + '\'');
             } else if (config.app.county) {
-                defQuery += ' AND County = \'' + config.app.county + '\'';
+                defQuery = defQuery + (' AND County = \'' + config.app.county + '\'');
             }
             console.log('app/download/Download:download', defQuery);
 
@@ -116,7 +116,7 @@ define([
             }
 
             var params = {
-                'filter_query': JSON.stringify({ 'query': defQuery })
+                filterQuery: JSON.stringify({ query: defQuery })
             };
 
             this.gp.submitJob(params);

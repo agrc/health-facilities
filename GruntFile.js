@@ -79,7 +79,7 @@ module.exports = function (grunt) {
         testname: 'health-facilities',
         maxRetries: 10,
         maxPollRetries: 10,
-        'public': 'public',
+        public: 'public',
         throttled: 5,
         sauceConfig: {
             'max-duration': 1800
@@ -144,11 +144,14 @@ module.exports = function (grunt) {
                     base: 'src'
                 }
             }
-            //uses_defaults: {port: 80}
+            // uses_defaults: {port: 80}
         },
         copy: {
             main: {
-                files: [{expand: true, cwd: 'src/', src: ['*.html'], dest: 'dist/'}]
+                files: [{ expand: true,
+                    cwd: 'src/',
+                    src: ['*.html'],
+                    dest: 'dist/' }]
             }
         },
         dojo: {
@@ -169,7 +172,8 @@ module.exports = function (grunt) {
                 dojo: 'src/dojo/dojo.js', // Path to dojo.js file in dojo source
                 load: 'build', // Optional: Utility to bootstrap (Default: 'build')
                 releaseDir: '../dist',
-                requires: ['src/app/packages.js', 'src/app/run.js'], // Optional: Module to require for the build (Default: nothing)
+                requires: ['src/app/packages.js', 'src/app/run.js'], // Optional: Module to require for the
+                                                                     // build (Default: nothing)
                 basePath: './src'
             }
         },
@@ -305,7 +309,7 @@ module.exports = function (grunt) {
         },
         verbosity: {
             main: {
-                options: {mode: 'normal'},
+                options: { mode: 'normal' },
                 tasks: ['saucelabs-jasmine']
             }
         },

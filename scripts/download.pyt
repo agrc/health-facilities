@@ -101,7 +101,7 @@ class CreateCsv(object):
 
         p0 = arcpy.Parameter(
             displayName='Filter query',
-            name='filter_query',
+            name='filterQuery',
             datatype='String',
             parameterType='Required',
             direction='Input')
