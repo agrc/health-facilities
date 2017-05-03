@@ -5,6 +5,8 @@ from glob import glob
 from shutil import rmtree
 import itertools
 import json
+import string
+from operator import itemgetter
 
 
 class Toolbox(object):
@@ -18,7 +20,7 @@ class Toolbox(object):
 
 class CreateCsv(object):
 
-    version = '1.1.1'
+    version = '1.1.2'
 
     def __init__(self, workspace=None):
         self.label = 'Download'
@@ -85,8 +87,10 @@ class CreateCsv(object):
         with arcpy.da.SearchCursor(self.health_facilities,
                                    self.fields,
                                    query) as cursor:
-            rows = list(cursor)
+            for row in cursor:
+                rows.append([string.strip(unicode(x), '"') for x in row])
 
+        rows = sorted(rows, key=itemgetter(0))
         with open(output_file, 'wb') as output:
             csv_writer = csv.writer(output)
             csv_writer.writerow(self.fields)
@@ -97,7 +101,7 @@ class CreateCsv(object):
 
         p0 = arcpy.Parameter(
             displayName='Filter query',
-            name='filter_query',
+            name='filterQuery',
             datatype='String',
             parameterType='Required',
             direction='Input')
