@@ -34,8 +34,8 @@ define([
         apiKey: '', // acquire at developer.mapserv.utah.gov
 
         urls: {
-            facilities: '/arcgis/rest/services/HealthFacilities/MapServer/0',
-            download: '/arcgis/rest/services/CreateCsv/GPServer/Download'
+            facilities: '/arcgis/rest/services/HealthFacilities/HealthFacilities/MapServer/0',
+            download: '/arcgis/rest/services/HealthFacilities/CreateCsv/GPServer/Download'
         },
         parameterNames: {
             output: 'output' // download service

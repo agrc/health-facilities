@@ -261,8 +261,7 @@ module.exports = function (grunt) {
                 options: {
                     host: '<%= secrets.prod.host %>',
                     username: '<%= secrets.prod.username %>',
-                    password: '<%= secrets.prod.password %>',
-                    path: './upload/' + deployDir
+                    password: '<%= secrets.prod.password %>'
                 }
             },
             options: {
@@ -343,7 +342,8 @@ module.exports = function (grunt) {
     grunt.registerTask('deploy-prod', [
         'clean:deploy',
         'compress:main',
-        'sftp:prod'
+        'sftp:prod',
+        'sshexec:prod'
     ]);
     grunt.registerTask('build-stage', [
         'parallel:buildAssets',
