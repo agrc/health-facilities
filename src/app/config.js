@@ -319,8 +319,8 @@ define([
 
     if (has('agrc-build') === 'prod') {
         // mapserv.utah.gov
-        window.AGRC.apiKey = 'AGRC-F8424FE7767822';  // make a new one
-        window.AGRC.quadWord = 'career-exhibit-panel-stadium';
+        window.AGRC.apiKey = 'AGRC-D9355732264013';
+        window.AGRC.quadWord = 'alfred-plaster-crystal-dexter';
     } else if (has('agrc-build') === 'stage') {
         // test.mapserv.utah.gov
         window.AGRC.quadWord = 'opera-event-little-pinball';
