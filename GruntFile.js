@@ -10,28 +10,12 @@ module.exports = function (grunt) {
         'src/ChangeLog.html'
     ];
     var gruntFile = 'GruntFile.js';
-    var internFile = 'tests/intern.js';
-    var jsFiles = [jsAppFiles, gruntFile, internFile, 'profiles/**/*.js'];
+    var jsFiles = [jsAppFiles, gruntFile, 'profiles/**/*.js'];
     var bumpFiles = [
         'package.json',
         'bower.json',
         'src/app/package.json',
         'src/app/config.js'
-    ];
-    var deployFiles = [
-        '**',
-        '!**/*.uncompressed.js',
-        '!**/*consoleStripped.js',
-        '!**/bootstrap/less/**',
-        '!**/bootstrap/test-infra/**',
-        '!**/tests/**',
-        '!build-report.txt',
-        '!components-jasmine/**',
-        '!favico.js/**',
-        '!jasmine-favicon-reporter/**',
-        '!jasmine-jsreporter/**',
-        '!stubmodule/**',
-        '!util/**'
     ];
 
     // Project configuration.
