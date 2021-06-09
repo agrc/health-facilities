@@ -1,35 +1,4 @@
 /* jshint camelcase:false */
-var osx = 'OS X 10.10';
-var windows = 'Windows 8.1';
-var browsers = [{
-    // OSX
-    browserName: 'safari',
-    platform: osx
-}, {
-    // Windows
-    browserName: 'firefox',
-    platform: windows
-}, {
-    browserName: 'chrome',
-    platform: windows,
-    version: '47'
-}, {
-    browserName: 'microsoftedge',
-    platform: 'Windows 10'
-}, {
-    browserName: 'internet explorer',
-    platform: windows,
-    version: '11'
-}, {
-    browserName: 'internet explorer',
-    platform: 'Windows 8',
-    version: '10'
-}, {
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '9'
-}];
-
 module.exports = function (grunt) {
     require('load-grunt-tasks')(grunt);
 
@@ -42,12 +11,7 @@ module.exports = function (grunt) {
     ];
     var gruntFile = 'GruntFile.js';
     var internFile = 'tests/intern.js';
-    var jsFiles = [
-        jsAppFiles,
-        gruntFile,
-        internFile,
-        'profiles/**/*.js'
-    ];
+    var jsFiles = [jsAppFiles, gruntFile, internFile, 'profiles/**/*.js'];
     var bumpFiles = [
         'package.json',
         'bower.json',
@@ -69,46 +33,6 @@ module.exports = function (grunt) {
         '!stubmodule/**',
         '!util/**'
     ];
-    var deployDir = 'HealthFacilities';
-    var secrets;
-    var sauceConfig = {
-        urls: ['http://127.0.0.1:8000/_SpecRunner.html?catch=false'],
-        tunnelTimeout: 120,
-        build: process.env.TRAVIS_JOB_ID,
-        browsers: browsers,
-        testname: 'health-facilities',
-        maxRetries: 10,
-        maxPollRetries: 10,
-        public: 'public',
-        throttled: 5,
-        sauceConfig: {
-            'max-duration': 1800
-        },
-        statusCheckAttempts: 500
-    };
-    try {
-        secrets = grunt.file.readJSON('secrets.json');
-        sauceConfig.username = secrets.sauce_name;
-        sauceConfig.key = secrets.sauce_key;
-    } catch (e) {
-        // swallow for build server
-
-        // still print a message so you can catch bad syntax in the secrets file.
-        grunt.log.write(e);
-
-        secrets = {
-            stage: {
-                host: '',
-                username: '',
-                password: ''
-            },
-            prod: {
-                host: '',
-                username: '',
-                password: ''
-            }
-        };
-    }
 
     // Project configuration.
     grunt.initConfig({
@@ -129,12 +53,14 @@ module.exports = function (grunt) {
                 options: {
                     archive: 'deploy/deploy.zip'
                 },
-                files: [{
-                    src: deployFiles,
-                    dest: './',
-                    cwd: 'dist/',
-                    expand: true
-                }]
+                files: [
+                    {
+                        src: deployFiles,
+                        dest: './',
+                        cwd: 'dist/',
+                        expand: true
+                    }
+                ]
             }
         },
         connect: {
@@ -158,13 +84,19 @@ module.exports = function (grunt) {
             prod: {
                 options: {
                     // You can also specify options to be used in all your tasks
-                    profiles: ['profiles/prod.build.profile.js', 'profiles/build.profile.js'] // Profile for build
+                    profiles: [
+                        'profiles/prod.build.profile.js',
+                        'profiles/build.profile.js'
+                    ] // Profile for build
                 }
             },
             stage: {
                 options: {
                     // You can also specify options to be used in all your tasks
-                    profiles: ['profiles/stage.build.profile.js', 'profiles/build.profile.js'] // Profile for build
+                    profiles: [
+                        'profiles/stage.build.profile.js',
+                        'profiles/build.profile.js'
+                    ] // Profile for build
                 }
             },
             options: {
@@ -173,13 +105,14 @@ module.exports = function (grunt) {
                 load: 'build', // Optional: Utility to bootstrap (Default: 'build')
                 releaseDir: '../dist',
                 requires: ['src/app/packages.js', 'src/app/run.js'], // Optional: Module to require for the
-                                                                     // build (Default: nothing)
+                // build (Default: nothing)
                 basePath: './src'
             }
         },
         eslint: {
             options: {
-                configFile: '.eslintrc'
+                configFile: '.eslintrc',
+                fix: true
             },
             main: {
                 src: jsFiles
@@ -190,13 +123,15 @@ module.exports = function (grunt) {
                 options: {
                     optimizationLevel: 3
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'src/',
-                    // exclude tests because some images in dojox throw errors
-                    src: ['**/*.{png,jpg,gif}', '!**/tests/**/*.*'],
-                    dest: 'src/'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        // exclude tests because some images in dojox throw errors
+                        src: ['**/*.{png,jpg,gif}', '!**/tests/**/*.*'],
+                        dest: 'src/'
+                    }
+                ]
             }
         },
         jasmine: {
@@ -237,73 +172,20 @@ module.exports = function (grunt) {
                 }
             }
         },
-        'saucelabs-jasmine': {
-            all: {
-                options: sauceConfig
-            }
-        },
-        secrets: secrets,
-        sftp: {
-            stage: {
-                files: {
-                    './': 'deploy/deploy.zip'
-                },
-                options: {
-                    host: '<%= secrets.stage.host %>',
-                    username: '<%= secrets.stage.username %>',
-                    password: '<%= secrets.stage.password %>'
-                }
-            },
-            prod: {
-                files: {
-                    './': 'deploy/deploy.zip'
-                },
-                options: {
-                    host: '<%= secrets.prod.host %>',
-                    username: '<%= secrets.prod.username %>',
-                    password: '<%= secrets.prod.password %>'
-                }
-            },
-            options: {
-                createDirectories: false,
-                path: './wwwroot/' + deployDir + '/',
-                srcBasePath: 'deploy/',
-                showProgress: true
-            }
-        },
-        sshexec: {
-            options: {
-
-            },
-            stage: {
-                command: ['cd wwwroot/' + deployDir, 'unzip -oq deploy.zip', 'rm deploy.zip'].join(';'),
-                options: {
-                    host: '<%= secrets.stage.host %>',
-                    username: '<%= secrets.stage.username %>',
-                    password: '<%= secrets.stage.password %>'
-                }
-            },
-            prod: {
-                command: ['cd wwwroot/' + deployDir, 'unzip -oq deploy.zip', 'rm deploy.zip'].join(';'),
-                options: {
-                    host: '<%= secrets.prod.host %>',
-                    username: '<%= secrets.prod.username %>',
-                    password: '<%= secrets.prod.password %>'
-                }
-            }
-        },
         stylus: {
             main: {
                 options: {
                     compress: false
                 },
-                files: [{
-                    expand: true,
-                    cwd: 'src/',
-                    src: ['app/**/*.styl'],
-                    dest: 'src/',
-                    ext: '.css'
-                }]
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'src/',
+                        src: ['app/**/*.styl'],
+                        dest: 'src/',
+                        ext: '.css'
+                    }
+                ]
             }
         },
         verbosity: {
@@ -328,11 +210,7 @@ module.exports = function (grunt) {
         }
     });
 
-    grunt.registerTask('default', [
-        'parallel:assets',
-        'connect',
-        'watch'
-    ]);
+    grunt.registerTask('default', ['parallel:assets', 'connect', 'watch']);
     grunt.registerTask('build-prod', [
         'parallel:buildAssets',
         'dojo:prod',
