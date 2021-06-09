@@ -7,7 +7,7 @@ require(['dojo/domReady!'], function () {
 
             var hasProps = function (obj) {
                 for (var prop in obj) {
-                    if (obj.hasOwnProperty(prop)) {
+                    if (Object.prototype.hasOwnProperty.call(obj, prop)) {
                         return true;
                     }
                 }
