@@ -217,28 +217,11 @@ module.exports = function (grunt) {
         'copy:main',
         'processhtml:main'
     ]);
-    grunt.registerTask('deploy-prod', [
-        'clean:deploy',
-        'compress:main',
-        'sftp:prod',
-        'sshexec:prod'
-    ]);
     grunt.registerTask('build-stage', [
         'parallel:buildAssets',
         'dojo:stage',
         'copy:main',
         'processhtml:main'
-    ]);
-    grunt.registerTask('deploy-stage', [
-        'clean:deploy',
-        'compress:main',
-        'sftp:stage',
-        'sshexec:stage'
-    ]);
-    grunt.registerTask('sauce', [
-        'jasmine:main:build',
-        'connect',
-        'saucelabs-jasmine'
     ]);
     grunt.registerTask('travis', [
         'verbosity:main',
