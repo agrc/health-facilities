@@ -256,7 +256,6 @@ module.exports = function (grunt) {
     grunt.registerTask('travis', [
         'verbosity:main',
         'eslint:main',
-        'sauce',
         'build-prod'
     ]);
 };
