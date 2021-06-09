@@ -34,8 +34,8 @@ define([
         apiKey: '', // acquire at developer.mapserv.utah.gov
 
         urls: {
-            facilities: '/arcgis/rest/services/HealthFacilities/HealthFacilities/MapServer/0',
-            download: '/arcgis/rest/services/HealthFacilities/CreateCsv/GPServer/Download'
+            facilities: 'https://mapserv.utah.gov/arcgis/rest/services/HealthFacilities/HealthFacilities/MapServer/0',
+            download: 'https://mapserv.utah.gov/arcgis/rest/services/HealthFacilities/CreateCsv/GPServer/Download'
         },
         parameterNames: {
             output: 'output' // download service
@@ -322,9 +322,9 @@ define([
         window.AGRC.apiKey = 'AGRC-D9355732264013';
         window.AGRC.quadWord = 'alfred-plaster-crystal-dexter';
     } else if (has('agrc-build') === 'stage') {
-        // test.mapserv.utah.gov
-        window.AGRC.quadWord = 'opera-event-little-pinball';
-        window.AGRC.apiKey = 'AGRC-AC122FA9671436';
+        // *.dev.utah.gov
+        window.AGRC.quadWord = 'wedding-tactic-enrico-yes';
+        window.AGRC.apiKey = 'AGRC-FE1B257E901672';
     } else {
         // localhost
         xhr(require.baseUrl + 'secrets.json', {
