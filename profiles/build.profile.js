@@ -48,7 +48,24 @@ var profile = {
     plugins: {
         'xstyle/css': 'xstyle/build/amd-css'
     },
+    packages: [{
+        name: 'moment',
+        location: 'moment',
+        main: 'moment',
+        trees: [
+            // don't bother with .hidden, tests, min, src, and templates
+            ['.', '.', /(\/\.)|(~$)|(test|txt|src|min|templates)/]
+        ]
+    }, 'dgrid1', 'dstore', 'xstyle'],
+    map: {
+        ladda: {
+            spin: 'ladda/dist/spin'
+        },
+        sherlock: {
+            spinjs: 'spin'
+        }
+    },
     userConfig: {
-        packages: ['app', 'dijit', 'dojox', 'agrc', 'ijit', 'esri', 'layer-selector']
+        packages: ['app', 'dijit', 'dojox', 'agrc', 'ijit', 'esri', 'layer-selector', 'sherlock']
     }
 };
