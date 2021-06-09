@@ -48,21 +48,6 @@ module.exports = function (grunt) {
             build: ['dist'],
             deploy: ['deploy']
         },
-        compress: {
-            main: {
-                options: {
-                    archive: 'deploy/deploy.zip'
-                },
-                files: [
-                    {
-                        src: deployFiles,
-                        dest: './',
-                        cwd: 'dist/',
-                        expand: true
-                    }
-                ]
-            }
-        },
         connect: {
             main: {
                 options: {
