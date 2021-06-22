@@ -15,19 +15,19 @@ define([
 
     'bootstrap'
 ], function (
-  FilterSelect,
+    FilterSelect,
 
-  _TemplatedMixin,
-  _WidgetBase,
-  _WidgetsInTempalteMixin,
+    _TemplatedMixin,
+    _WidgetBase,
+    _WidgetsInTempalteMixin,
 
-  domClass,
-  domConstruct,
-  Evented,
-  on,
-  template,
-  declare,
-  lang
+    domClass,
+    domConstruct,
+    Evented,
+    on,
+    template,
+    declare,
+    lang
 ) {
     return declare([_WidgetBase, _TemplatedMixin, _WidgetsInTempalteMixin, Evented], {
         // description:
@@ -102,8 +102,8 @@ define([
                 cancelable: false });
         },
         clear: function () {
-          // summary:
-          //      Fires when clear all is selected and unselects all children.
+            // summary:
+            //      Fires when clear all is selected and unselects all children.
             console.log('app/filters/FilterParent:clear', arguments);
 
             this.childFilters.forEach(function (c) {
@@ -120,8 +120,8 @@ define([
                 cancelable: false });
         },
         selectAll: function () {
-          // summary:
-          //      Fires when select all is clicked and selects all children.
+            // summary:
+            //      Fires when select all is clicked and selects all children.
             console.log('app/filters/FilterParent:selectAll', arguments);
 
             this.childFilters.forEach(function (c) {
