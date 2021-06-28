@@ -318,9 +318,9 @@ define([
     };
 
     if (has('agrc-build') === 'prod') {
-        // mapserv.utah.gov
+        // *.ugrc.utah.gov
         window.AGRC.apiKey = 'AGRC-D9355732264013';
-        window.AGRC.quadWord = 'alfred-plaster-crystal-dexter';
+        window.AGRC.quadWord = 'ivory-telecom-person-medusa';
     } else if (has('agrc-build') === 'stage') {
         // *.dev.utah.gov
         window.AGRC.quadWord = 'wedding-tactic-enrico-yes';
