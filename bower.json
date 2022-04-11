@@ -5,6 +5,7 @@
     "agrc": "agrc-widgets#5.0.2",
     "agrc-jasmine-matchers": "~0.1.0",
     "bootstrap": "3.3.6",
+    "dijit-themes": "https://github.com/dojo/dijit-themes.git#1.14.0",
     "esri": "arcgis-js-api#~3.36.0",
     "ijit": "agrc-ijit#3.1.1",
     "jasmine-favicon-reporter": "*",

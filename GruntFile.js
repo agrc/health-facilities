@@ -80,7 +80,7 @@ module.exports = function (grunt) {
         },
         eslint: {
             options: {
-                configFile: '.eslintrc',
+                overrideConfigFile: '.eslintrc',
                 fix: true
             },
             main: {
@@ -221,10 +221,5 @@ module.exports = function (grunt) {
         'uglify:stage',
         'copy:main',
         'processhtml:main'
-    ]);
-    grunt.registerTask('travis', [
-        'verbosity:main',
-        'eslint:main',
-        'build-prod'
     ]);
 };
