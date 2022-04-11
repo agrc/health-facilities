@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    target-branch: dev
+    directory: /
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
+  - package-ecosystem: github-actions
+    target-branch: dev
+    directory: /
+    schedule:
+      interval: monthly
+    labels:
+      - dependencies
