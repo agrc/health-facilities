@@ -2,29 +2,28 @@
   "name": "health-facilities",
   "version": "1.0.0",
   "dependencies": {
-    "agrc": "agrc-widgets#5.0.2",
     "agrc-jasmine-matchers": "~0.1.0",
+    "agrc": "agrc-widgets#5.0.2",
     "bootstrap": "3.3.6",
-    "dijit-themes": "https://github.com/dojo/dijit-themes.git#1.14.0",
     "esri": "arcgis-js-api#~3.36.0",
     "ijit": "agrc-ijit#3.1.1",
     "jasmine-favicon-reporter": "*",
-    "stubmodule": "^0.6",
     "jasmine-jsreporter": "^0.1.2",
     "layer-selector": "agrc-layer-selector#~0.4.0",
-    "xstyle": "0.3.2",
-    "sherlock": "agrc-sherlock#^1.0.0"
+    "sherlock": "agrc-sherlock#^1.0.0",
+    "stubmodule": "^0.6",
+    "xstyle": "0.3.2"
   },
   "resolutions": {
     "agrc": "5.0.2",
-    "spinjs": "~2.3.2",
-    "dojo": "v1.16.3/esri-3.36.0",
-    "dijit": "v1.16.3/esri-3.36.0",
-    "dojox": "v1.14.2/esri-3.28.0",
     "dgrid": "0.3.17/esri-3.20.0",
+    "dijit": "v1.16.3/esri-3.36.0",
+    "dojo": "v1.16.3/esri-3.36.0",
+    "dojox": "v1.14.2/esri-3.28.0",
     "dstore": "1.1.2",
+    "esri": "~3.36.0",
+    "spinjs": "~2.3.2",
     "util": "v1.14.2/esri-3.28.0",
-    "xstyle": "0.3.2",
-    "esri": "~3.36.0"
+    "xstyle": "0.3.2"
   }
 }
