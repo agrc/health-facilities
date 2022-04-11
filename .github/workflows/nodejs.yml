@@ -48,6 +48,15 @@ jobs:
       - name: 📥 Download dependencies
         run: npm ci
 
+      - name: 🪣 Cache bower
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/bower
+          key: ${{ runner.OS }}-bower-${{ hashFiles('bower.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-bower-
+            ${{ runner.OS }}-
+
       - name: 🏗 Run build script
         run: npm run build:prod
 
@@ -100,6 +109,15 @@ jobs:
 
       - name: 📥 Download dependencies
         run: npm ci
+
+      - name: 🪣 Cache bower
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/bower
+          key: ${{ runner.OS }}-bower-${{ hashFiles('bower.json') }}
+          restore-keys: |
+            ${{ runner.OS }}-bower-
+            ${{ runner.OS }}-
 
       - name: 🏗 Run build script
         run: npm run build:prod
