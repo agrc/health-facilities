@@ -58,7 +58,7 @@ jobs:
             ${{ runner.OS }}-
 
       - name: 🏗 Run build script
-        run: npm run build:prod
+        run: npm run build:stage
 
       - name: 🪣 Cache firebase
         uses: actions/cache@v3
