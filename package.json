@@ -19,7 +19,7 @@
     "dojo": "^1.17.2",
     "eslint": "^8.14.0",
     "eslint-plugin-html": "^6.2.0",
-    "grunt": "^1.5.2",
+    "grunt": "^1.5.3",
     "grunt-bump": "^0.8.0",
     "grunt-contrib-clean": "^2.0.1",
     "grunt-contrib-connect": "^3.0.0",
