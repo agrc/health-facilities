@@ -15,6 +15,11 @@ concurrency:
   group: '${{ github.head_ref || github.ref }}'
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  id-token: write
+  deployments: write
+
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
@@ -22,10 +27,6 @@ jobs:
       name: dev
       url: https://health-facilities.dev.utah.gov
     if: github.ref != 'refs/heads/main'
-    permissions:
-      contents: read
-      id-token: write
-      deployments: write
 
     steps:
       - name: ⬇️ Setup code
@@ -84,10 +85,6 @@ jobs:
       name: prod
       url: https://health-facilities.ugrc.utah.gov
     if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-      id-token: write
-      deployments: write
 
     steps:
       - name: ⬇️ Setup code
