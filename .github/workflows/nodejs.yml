@@ -5,6 +5,7 @@ on:
     paths:
       - "src/**"
       - ".github/workflows/nodejs.yml"
+      - "package.json"
       - "package-lock.json"
       - "firebase.json"
       - ".firebaserc"
