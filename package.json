@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "grunt",
-    "build": "grunt build-stage",
+    "build:stage": "grunt build-stage",
     "build:prod": "grunt build-prod",
     "postinstall": "bower install",
     "lint": "grunt eslint"
