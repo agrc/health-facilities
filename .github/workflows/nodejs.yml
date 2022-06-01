@@ -5,6 +5,7 @@ on:
     paths:
       - "src/**"
       - ".github/workflows/nodejs.yml"
+      - "package.json"
       - "package-lock.json"
       - "firebase.json"
       - ".firebaserc"
@@ -14,6 +15,11 @@ concurrency:
   group: '${{ github.head_ref || github.ref }}'
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  id-token: write
+  deployments: write
+
 jobs:
   deploy-dev:
     runs-on: ubuntu-latest
@@ -21,17 +27,13 @@ jobs:
       name: dev
       url: https://health-facilities.dev.utah.gov
     if: github.ref != 'refs/heads/main'
-    permissions:
-      contents: read
-      id-token: write
-      deployments: write
 
     steps:
       - name: ⬇️ Setup code
         uses: actions/checkout@v3
 
-      - id: auth
-        name: 🗝️ Authenticate to Google Cloud
+      - name: 🗝️ Authenticate to Google Cloud
+        id: auth
         uses: google-github-actions/auth@v0
         with:
           access_token_scopes: 'email, openid, https://www.googleapis.com/auth/cloud-platform, https://www.googleapis.com/auth/firebase'
@@ -83,18 +85,14 @@ jobs:
       name: prod
       url: https://health-facilities.ugrc.utah.gov
     if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: read
-      id-token: write
-      deployments: write
 
     steps:
       - name: ⬇️ Setup code
         uses: actions/checkout@v3
 
-      - id: auth
-        name: 🗝️ Authenticate to Google Cloud
-        uses: google-github-actions/auth@v0.4.4
+      - name: 🗝️ Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v0
         with:
           access_token_scopes: 'email, openid, https://www.googleapis.com/auth/cloud-platform, https://www.googleapis.com/auth/firebase'
           workload_identity_provider: ${{ secrets.IDENTITY_PROVIDER }}
