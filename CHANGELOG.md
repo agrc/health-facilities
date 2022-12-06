@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.2-0](https://github.com/agrc/health-facilities/compare/v1.0.1...v1.0.2-0) (2022-12-06)
+
+
+### 🐛 Bug Fixes
+
+* :evergreen_tree: november package updates ([0b6bc31](https://github.com/agrc/health-facilities/commit/0b6bc311127ebd1f459009e3eb5d7bb44e464da5))
+
 ## [1.0.1](https://github.com/agrc/health-facilities/compare/v1.0.0...v1.0.1) (2022-10-06)
 
 
