@@ -19,7 +19,7 @@
     "dojo": "^1.17.3",
     "eslint": "^8.29.0",
     "eslint-plugin-html": "^7.1.0",
-    "firebase-tools": "^11.16.1",
+    "firebase-tools": "^11.17.0",
     "grunt": "^1.5.3",
     "grunt-bump": "^0.8.0",
     "grunt-contrib-clean": "^2.0.1",
