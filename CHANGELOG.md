@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/agrc/health-facilities/compare/v1.0.2...v1.0.3) (2023-04-04)
+
+
+### 🌲 Dependencies
+
+* q2 package updates ([e113d4b](https://github.com/agrc/health-facilities/commit/e113d4b2d00d23ba35eebcaa0e63c4f0ade72c01))
+
 ## [1.0.2](https://github.com/agrc/health-facilities/compare/v1.0.1...v1.0.2) (2022-12-09)
 
 
