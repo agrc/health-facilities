@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.4](https://github.com/agrc/health-facilities/compare/v1.0.3...v1.0.4) (2023-04-04)
+
+
+### 🐛 Bug Fixes
+
+* exclude unused files in moment package ([c87bfcd](https://github.com/agrc/health-facilities/commit/c87bfcd7b651a411dede44408856e193d254ab48))
+* Q2 Dep Bumps 🌲 ([35243b8](https://github.com/agrc/health-facilities/commit/35243b8b2cd38f541565f89bf3a72cdfe53441ed))
+
 ## [1.0.3](https://github.com/agrc/health-facilities/compare/v1.0.2...v1.0.3) (2023-04-04)
 
 
